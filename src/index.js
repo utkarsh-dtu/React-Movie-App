@@ -10,12 +10,24 @@ import movies from './reducers'
 
 const store = createStore(movies); // get the initial state
 console.log('store', store);
-console.log('STATE', store.getState());
+// console.log('BEFORE-STATE', store.getState());
+
+
+// using dispatch, we can send action to the reducer and that reducer will send a new state to the store (assing to the movies reducer in this case)
+// indirectly , we are updating a state in the store
+
+// triggering an action to the reducer
+// store.dispatch({
+//   type: 'ADD_MOVIES',
+//   movies : [{name : 'Superman'}]
+// });
+
+// console.log('After-STATE', store.getState());
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
