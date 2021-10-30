@@ -8,7 +8,7 @@ import movies from './reducers'
 
 // the movie inside is the reducer
 
-const store = createStore(movies); // get the initial state
+const store = createStore(movies); // get the initial state (movie is the reducer which returns new states to the store)
 console.log('store', store);
 // console.log('BEFORE-STATE', store.getState());
 
