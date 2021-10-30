@@ -5,21 +5,39 @@
 // Ui triggers an action to the reducer and this reducer will return a new state after making the requied changes and this reducer sends the new state to the store
 // i think the store stores all the states
 // reducers should be pure functions 4
-import { ADD_MOVIES } from "../actions";
+import { ADD_MOVIES, ADD_FAVOURITE } from "../actions";
 
-const initilMovieState = {
+const initialMovieState = {
   list: [],
   favourites: [],
 };
-// this reducer will return a state, so this time the state is actually an object, and hence we will have to return an object 
-export default function movies(state = initilMovieState, action) {
-  if (action.type === ADD_MOVIES) {
-    return {
+// this reducer will return a state, so this time the state is actually an object, and hence we will have to return an object
+// export default function movies(state = initialMovieState, action) {
+//   if (action.type === ADD_MOVIES) {
+//     return {
+//         ...state,
+//         list : action.movies
+//     };
+//   }
+//   return state; // if action is not there, then we will return this state array (empty one)
+// }
+
+export default function movies(state = initialMovieState, action) {
+  switch (action.type) {
+    case ADD_MOVIES:
+      return {
         ...state,
-        list : action.movies
-    };
+        list: action.movies,
+      }
+
+    case ADD_FAVOURITE:
+        return {
+            ...state,
+            favourites: [action.movie, ...state.favourites]
+        }
+    default:
+        return state 
   }
-  return state; // if action is not there, then we will return this state array (empty one)
 }
 
 // directly comparing strings is not advisable, because if we want to change the name of this ADD_MOVIES, we can simply change it once here
