@@ -1,5 +1,5 @@
 import React from "react";
-import {addFavourite} from '../actions'
+import {addFavourite, removeFromFavourite} from '../actions'
 // dispatch sends an action to the reducer and the reducer will return a new state to the store
 // boeing 787 dreamliner
 class MovieCard extends React.Component {
@@ -10,7 +10,8 @@ class MovieCard extends React.Component {
     }
 
     handleUnFavoriteClick = () => {
-
+        const { movie } = this.props;
+        this.props.dispatch(removeFromFavourite(movie));
     }
 
     render() {

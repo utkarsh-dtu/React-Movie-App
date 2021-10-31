@@ -5,11 +5,12 @@
 // Ui triggers an action to the reducer and this reducer will return a new state after making the requied changes and this reducer sends the new state to the store
 // i think the store stores all the states
 // reducers should be pure functions 4
-import { ADD_MOVIES, ADD_FAVOURITE } from "../actions";
+import { ADD_MOVIES, ADD_TO_FAVOURITE, REMOVE_FROM_FAVOURITES, SHOW_FAVOURITES } from "../actions";
 
 const initialMovieState = {
   list: [],
   favourites: [],
+  showFavourites : false
 };
 // this reducer will return a state, so this time the state is actually an object, and hence we will have to return an object
 // export default function movies(state = initialMovieState, action) {
@@ -30,11 +31,28 @@ export default function movies(state = initialMovieState, action) {
         list: action.movies,
       }
 
-    case ADD_FAVOURITE:
+    case ADD_TO_FAVOURITE:
         return {
             ...state,
             favourites: [action.movie, ...state.favourites]
         }
+
+    case REMOVE_FROM_FAVOURITES:
+      const filteredArray = state.favourites.filter(
+        movie => movie.Title !== action.movie.Title
+      );
+
+      return {
+        ...state, 
+        favourites : filteredArray
+      }
+
+    case SHOW_FAVOURITES:
+      return {
+        ...state,
+        showFavourites : action.val
+      }
+    
     default:
         return state 
   }
